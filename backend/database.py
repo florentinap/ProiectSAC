@@ -60,7 +60,44 @@ def getBookById(idBook):
 
 	return result
 
+def getDescriptions():
+	mydb = MySQLdb.connect(host = 'localhost', user = 'root', passwd = 'flory95', db = 'sac', use_unicode = True, charset = 'utf8')
+	cursor = mydb.cursor()
 
-# insertIntoMysql()
-# getBooksList()
-# getBookById(3)
+	query = 'SELECT id, description FROM books'
+	try:
+		cursor.execute(query)
+	except Exception as e:
+		print (e)
+
+	data = cursor.fetchall()[1:]
+	cursor.close()
+
+	result = list((d[0], d[1][1:-1]) for d in data)
+
+	return result
+
+def getBooksListById(ids):
+	mydb = MySQLdb.connect(host = 'localhost', user = 'root', passwd = 'flory95', db = 'sac', use_unicode = True, charset = 'utf8')
+	cursor = mydb.cursor()
+
+	data = []
+	for idBook in ids:
+		query = 'SELECT id, title, author FROM books where id = ' + str(idBook)
+		try:
+			cursor.execute(query)
+		except Exception as e:
+			print (e)
+
+		header = [x[0] for x in cursor.description]
+		data += [cursor.fetchone()]
+	
+	cursor.close()
+	
+	result = []
+	for d in data:
+		title = d[1][1:-1]
+		author = d[2][1:-1]
+		result.append(dict(zip(header, (d[0], title, author))))
+
+	return result

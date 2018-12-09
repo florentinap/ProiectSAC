@@ -1,0 +1,59 @@
+=== Lista tuturor cartilor ===
+* request: http://127.0.0.1:5000/allBooks
+* response: 
+[
+{id: id1, title: t1, author: a1},
+{id: id2, title: t2, author: a2}
+]
+
+
+=== Detalii carte ===
+* request: http://127.0.0.1:5000/bookById
+* params: id
+* response:
+{
+	id: 1,
+	url: 'http:example.com', 
+	title: 'abc', 
+	author: 'xyz, 
+	price: xx.xx, 
+	pages: xxx, 
+	description: 'qwertyuio', 
+	publisher: 'mno', 
+	language: 'lang', 
+	customer_reviews:: nr, 
+	stars: nr
+}
+
+=== Carti similare ===
+* request: http://127.0.0.1:5000/similarBooks
+* params: id
+* response:
+[
+{id: id1, title: t1, author: a1},
+{id: id2, title: t2, author: a2}
+]
+
+
+=== Idee interfata === 
+***
+pe prima pagina afisezi lista cartilot luate de la /allBooks -> nume, autor
+pot fi afisate cate x (de ex, 100), pe pagina si sa fie mai multe pagini
+***
+la click pe un element din lista cartilor, se face request la /bookById
+se deschide o noua pagina cu detaliile cartii selectate
+dupa deschiderea noii pagini, se face request la /similarBooks
+astfel, pagina cu detalii despre cartea selectata, se afiseaza lista cartilor similare (de exemplu, lista e intr-o zona speciala in partea stanga/dreapta a refestrei, langa detaliile despre carte) 
+lista cartilor similare are doar nume si autor
+se poate da click pe un element din lista cartilor similare -> se face request la /bookById -> se deschide o noua pagina cu detaliile despre cartea similara
+***
+ar fi util un buton de Go to first page. navigand din carte in carte, va fi greu sa ajungi din nou la lista initiala de carti
+***
+
+
+=== urmeaza ===  
+* selectare carti favorite 
+* oferire recomandari pe baza cartilor favorite (acum arata doar cartile similare cu cea pt care citesti detalii)
+* selectare carti dupa autor/search dupa titlu/sortare dupa rating (optionale; doar daca e timp)
+* baza de date cu useri si carti preferate
+* oferire recomandari dupa autor/titlu (acum se face doar dupa descriere) (optional)
