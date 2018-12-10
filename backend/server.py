@@ -1,3 +1,9 @@
+#/* Copyright (C) Florentina Petcu - All Rights Reserved
+# * Unauthorized copying of this file, via any medium is strictly prohibited
+# * Proprietary and confidential
+# * Written by Florentina Petcu <florentina.ptc@gmail.com>, December 2018
+# */
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from database import *
@@ -12,15 +18,15 @@ def allBooks():
     return jsonify(result)
 
 
-@app.route("/bookById")
+@app.route("/bookById", methods = ['POST', 'GET'])
 def bookById():
-	bookId = request.args.get('id')
-    result = getBookById(bookId)
-    return jsonify(result)
+	bookId = request.json['idBook']
+	result = getBookById(bookId)
+	return jsonify(result)
 
-@app.route("/similarBooks")
+@app.route("/similarBooks", methods = ['POST', 'GET'])
 def similarBooks():
-	bookId = request.args.get('id')
+	bookId = request.json['idBook']
 	result = getSimilarBooksList(bookId)
 	return jsonify(result)
 

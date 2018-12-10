@@ -1,3 +1,9 @@
+#/* Copyright (C) Florentina Petcu - All Rights Reserved
+# * Unauthorized copying of this file, via any medium is strictly prohibited
+# * Proprietary and confidential
+# * Written by Florentina Petcu <florentina.ptc@gmail.com>, December 2018
+# */
+
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from database import * 
@@ -19,5 +25,5 @@ def similarityDescription(position):
 	return result
 
 def getSimilarBooksList(idBook):
-	similarIds = similarityDescription(idBook - 2)
+	similarIds = similarityDescription(int(idBook) - 2)
 	return getBooksListById(similarIds)
