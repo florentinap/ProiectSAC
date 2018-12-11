@@ -36,13 +36,19 @@ class Book extends Component {
 
   }
 
+handleClick(id) {
+      post("bookById", {'idBook': id}).then(response => {
+        this.setState({detailsBook: response})
+      });
+      post("similarBooks", {'idBook': id}).then(response => {
+        this.setState({similarBooks: response})
+      });
+}
 
   buttonFormatter(cell, row){
         console.log("row= ", row.id);
         var path = "/book/" + row.id;
-      return  <Button
-                  onClick={() => this.props.history.push('/book/' + row.id)}
-              >Details Book
+      return  <Button onClick={() => this.handleClick(row.id)}>Details Book
               </Button>
   }
 
