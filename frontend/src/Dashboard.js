@@ -1,3 +1,9 @@
+/* Copyright (C) Maria-Ramona Raducu - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Maria-Ramona Raducu <raducu.ramona95@gmail.com>, December 2018
+*/
+
 import React, { Component } from 'react';
 import './Dashboard.css';
 // import react router
