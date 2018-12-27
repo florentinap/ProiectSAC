@@ -25,7 +25,7 @@
 	stars: nr
 }
 
-=== Carti similare ===
+=== Lista crti similare ===
 * request: http://127.0.0.1:5000/similarBooks
 * params: id
 * response:
@@ -33,6 +33,31 @@
 {id: id1, title: t1, author: a1},
 {id: id2, title: t2, author: a2}
 ]
+
+=== Adauga carte favorita ===
+* request: http://127.0.0.1:5000/favorite
+* params: idUser, idBook
+* response: 
+{'error': 'cannot set favorite book'}
+SAU
+{'OK': 'ok'}
+
+=== Lista carti favorite ===
+* request: http://127.0.0.1:5000/myFavorites
+* params: idUser
+* response:
+[
+{id: idBook1, title: t1, author: a1},
+{id: idBook2, title: t2, author: a2}
+]
+
+=== Login user ===
+* request: http://127.0.0.1:5000/login
+* params: username, password
+* response:
+{'error': 'Username or password are incorrect'}
+SAU
+{'OK': idUser}
 
 
 === Idee interfata === 
@@ -52,8 +77,10 @@ ar fi util un buton de Go to first page. navigand din carte in carte, va fi greu
 
 
 === urmeaza ===  
-* selectare carti favorite 
-* oferire recomandari pe baza cartilor favorite (acum arata doar cartile similare cu cea pt care citesti detalii)
-* selectare carti dupa autor/search dupa titlu/sortare dupa rating (optionale; doar daca e timp)
-* baza de date cu useri si carti preferate
-* oferire recomandari dupa autor/titlu (acum se face doar dupa descriere) (optional)
+1. front: adaugare carti favorite 
+2. back: oferire recomandari pe baza cartilor favorite (acum arata doar cartile similare cu cea pt care citesti detalii) - FLORENTINA
+3. front+back: selectare carti dupa autor/search dupa titlu/sortare dupa rating (optionale; doar daca e timp)
+4. front: login useri 
+5. front: pagina cu cartile favotire ale userului curent
+6. front: pagina cu recomandarile pt userul curent
+7. front: css, adaugare loadere

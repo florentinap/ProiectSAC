@@ -106,3 +106,36 @@ def getBooksListById(ids):
 		result.append(dict(zip(header, (d[0], title, author))))
 
 	return result
+
+def getFavorites(idUser):
+	mydb = MySQLdb.connect(host = 'localhost', user = 'root', passwd = 'flory95', db = 'sac', use_unicode = True, charset = 'utf8')
+	cursor = mydb.cursor()
+
+	query = 'SELECT idBook FROM favorites where idUser = ' + str(idUser)
+	try:
+		cursor.execute(query)
+	except Exception as e:
+		print (e)
+
+	idsbook = cursor.fetchall()
+	cursor.close()
+
+	result = []
+	for idbook in idsbook:
+		result.append(getBookById(idbook[0]))
+	return result
+
+def addFavorite(idUser, idBook):
+	mydb = MySQLdb.connect(host = 'localhost', user = 'root', passwd = 'flory95', db = 'sac', use_unicode = True, charset = 'utf8')
+	cursor = mydb.cursor()
+
+	try:
+		cursor.execute('INSERT into favorites (idUser, idBook) VALUES("%s", "%s")', [idUser, idBook])
+	except Exception as e:
+		print (e)
+		return {'error': 'cannot set favorite book'}
+
+	mydb.commit()
+	cursor.close()
+
+	return {'OK': 'ok'}
