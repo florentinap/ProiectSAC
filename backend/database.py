@@ -28,13 +28,14 @@ def getBooksList():
 	mydb = MySQLdb.connect(host = 'localhost', user = 'root', passwd = 'flory95', db = 'sac', use_unicode = True, charset = 'utf8')
 	cursor = mydb.cursor()
 
-	query = 'SELECT id, title, author FROM books'
+	query = 'SELECT id, title, author, stars FROM books'
 	try:
 		cursor.execute(query)
 	except Exception as e:
 		print (e)
 
 	header = [x[0] for x in cursor.description]
+	header[3] = 'rating'
 	data = cursor.fetchall()[1:]
 	cursor.close()
 
@@ -42,7 +43,8 @@ def getBooksList():
 	for d in data:
 		title = d[1][1:-1]
 		author = d[2][1:-1]
-		result.append(dict(zip(header, (d[0], title, author))))
+		stars = d[3][1:-1]
+		result.append(dict(zip(header, (d[0], title, author, stars))))
 
 	return result
 
@@ -88,13 +90,14 @@ def getBooksListById(ids):
 
 	data = []
 	for idBook in ids:
-		query = 'SELECT id, title, author FROM books where id = ' + str(idBook)
+		query = 'SELECT id, title, author, stars FROM books where id = ' + str(idBook)
 		try:
 			cursor.execute(query)
 		except Exception as e:
 			print (e)
 
 		header = [x[0] for x in cursor.description]
+		header[3] = 'rating'
 		data += [cursor.fetchone()]
 	
 	cursor.close()
@@ -103,7 +106,8 @@ def getBooksListById(ids):
 	for d in data:
 		title = d[1][1:-1]
 		author = d[2][1:-1]
-		result.append(dict(zip(header, (d[0], title, author))))
+		stars = d[3][1:-1]
+		result.append(dict(zip(header, (d[0], title, author, stars))))
 
 	return result
 

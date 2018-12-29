@@ -18,10 +18,9 @@ export const  getJson = (relativeUrl) => {
                           method: 'GET',
                           headers: headers,
                 })
-        .then(res => {
-           console.log('================ Rezultat', res);
+       .then(res => {
             return res.json();
-        })
+       })
        .then(data => {
            console.log("data GET::: ", data);
            return data;
@@ -39,7 +38,6 @@ export const post = (relativeUrl, data) => {
 		 return res.json()
 	})
 	.then(data => {
-		console.log("dataPOOOOOOST:", data);
 		return data;
 
 	});
@@ -50,5 +48,5 @@ export function getAllBooks() {
   return [
           {"id": "id1", "title": "t1", "author": "a1"},
           {"id": "id2", "title": "t2", "author": "a2"}
-          ];
+        ];
 }
