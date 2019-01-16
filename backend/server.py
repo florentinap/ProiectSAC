@@ -31,6 +31,13 @@ def similarBooks():
 	result = getSimilarBooksList(bookId)
 	return jsonify(result)
 
+@app.route("/recomandation", methods = ['POST', 'GET'])
+def myFavorites():
+	idUser = request.json['idUser']
+	nr = request.json['nr']
+	result = getRecomandation(idUser, nr)
+	return jsonify(result)
+
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
 	username = request.json('username')
@@ -50,6 +57,7 @@ def favorite():
 	idBook = request.json['idBook']
 	result = addFavorite(idUser, idBook)
 	return jsonify(result)
+
 
 
 if __name__ == "__main__":

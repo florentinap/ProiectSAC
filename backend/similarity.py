@@ -27,3 +27,8 @@ def similarityDescription(position):
 def getSimilarBooksList(idBook):
 	similarIds = similarityDescription(int(idBook) - 2)
 	return getBooksListById(similarIds)
+
+
+def getRecomandation(idUser, nr):
+	favorites = sorted(getFavorites(idUser), key = lambda x: x['stars'])
+	return getSimilarBooksList(favorites[nr]['id'])
