@@ -28,7 +28,15 @@ def getSimilarBooksList(idBook):
 	similarIds = similarityDescription(int(idBook) - 2)
 	return getBooksListById(similarIds)
 
-
-def getRecomandation(idUser, nr):
+def computeRecomandation(idUser):
+	result = []
 	favorites = sorted(getFavorites(idUser), key = lambda x: x['stars'])
-	return getSimilarBooksList(favorites[nr]['id'])
+	for f in favorites:
+		result += getSimilarBooksList(f['id'])
+	for f in favorites:
+		if f in result:
+			result.remove(f)
+
+	insertRecomandation(idUser, result)
+
+	return result

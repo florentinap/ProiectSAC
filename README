@@ -61,12 +61,22 @@ SAU
 
 === Lista recomandarilor ===
 * request: http://127.0.0.1:5000/recomandation
-* params: idUser, nr
+* params: idUser
 * response:
 [
 {id: idBook1, title: t1, author: a1},
 {id: idBook2, title: t2, author: a2}
 ]
+
+=== Regenereaza lista recomandari ===
+* request: http://127.0.0.1:5000/newRecomandation
+* params: idUser
+* response:
+[
+{id: idBook1, title: t1, author: a1},
+{id: idBook2, title: t2, author: a2}
+]
+
 
 === Idee interfata === 
 ***

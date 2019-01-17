@@ -143,3 +143,34 @@ def addFavorite(idUser, idBook):
 	cursor.close()
 
 	return {'OK': 'ok'}
+
+def insertRecomandation(idUser, books):
+	mydb = MySQLdb.connect(host = 'localhost', user = 'root', passwd = 'flory95', db = 'sac', use_unicode = True, charset = 'utf8')
+	cursor = mydb.cursor()
+
+	for book in books:
+		try:
+			cursor.execute('INSERT into recomandation (idUser, idBook) VALUES("%s", "%s")', [idUser, book['id']])
+		except Exception as e:
+			print (e)
+	
+	mydb.commit()
+	cursor.close()
+
+def getRecomandation(idUser):
+	mydb = MySQLdb.connect(host = 'localhost', user = 'root', passwd = 'flory95', db = 'sac', use_unicode = True, charset = 'utf8')
+	cursor = mydb.cursor()
+
+	query = 'SELECT idBook FROM recomandation where idUser = ' + str(idUser)
+	try:
+		cursor.execute(query)
+	except Exception as e:
+		print (e)
+
+	idsbook = list(set(cursor.fetchall()))
+	cursor.close()
+
+	result = []
+	for idbook in idsbook:
+		result.append(getBookById(idbook[0]))
+	return result
